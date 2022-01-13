@@ -1,18 +1,27 @@
 package demo.spring.model;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
+@Entity
+@Table(name="quotes")
 public class Quote {
 
+    @Id
     private int id;
     private String quote;
+
+    public Quote() {
+    }
 
     public Quote(String quote, int id) {
         this.quote = quote;
         this.id = id;
     }
 
-    public Quote() {
-
+    public Quote(String quote) {
+        this.quote = quote;
     }
 
     public void setId(int id) {
@@ -23,7 +32,7 @@ public class Quote {
         this.quote = quote;
     }
 
-    public int getID() {
+    public int getId() {
         return id;
     }
 

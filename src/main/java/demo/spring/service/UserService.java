@@ -1,35 +1,41 @@
 package demo.spring.service;
 
-import demo.spring.data.DataAccess;
+import demo.spring.repository.JPAdao;
+import demo.spring.model.Quote;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class UserService {
 
-    private DataAccess dao;
-
     @Autowired
-    public UserService(DataAccess dao) {
-        this.dao = dao;
-    }
+    JPAdao dao;
 
     public String getAllQuotes() {
-        return dao.selectAll();
+        return dao.findAll().toString();
     }
 
     public String getQuote(int id) {
-        return dao.selectQuote(id);
+        return dao.findById(id).toString();
     }
 
     public int insertQuote(String quote) {
-        return dao.insertQuote(quote);
+        Quote tmp = new Quote(quote);
+        dao.save(tmp);
+
+        return 1;
     }
 
-    public int updateQuote(int id, String quote) {return dao.updateQuote(id, quote);}
+    public int updateQuote(int id, String quote) {
+        Quote tmp = new Quote(quote, id);
+        dao.save(tmp);
+
+        return 1;
+    }
 
     public int deleteQuote(int id) {
-        return dao.deleteQuote(id);
+        dao.deleteById(id);
+        return 1;
     }
 
 }
