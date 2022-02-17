@@ -36,6 +36,10 @@ public class Quote {
         return id;
     }
 
+    public String getQuote() {
+        return quote;
+    }
+
     @Override
     public String toString() {
         return "{\n" +
